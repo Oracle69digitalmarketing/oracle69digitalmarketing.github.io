@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Oracle69 Digital Marketing</title>
+  <title>Contact - Oracle69 Digital Marketing</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Welcome to Oracle69 Digital Marketing</h1>
+    <h1>Contact Us</h1>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -18,8 +18,26 @@
   </header>
   <main>
     <section>
-      <h2>Grow Your Business Online</h2>
-      <p>We help businesses boost their digital presence and reach more customers. Explore our services and discover how we can help your business grow!</p>
+      <h2>Get in Touch</h2>
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <section style="margin-top: 40px;">
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong> +2348039271978</p>
+      <p><strong>WhatsApp:</strong> +2348039271978</p>
+      <p><strong>Email:</strong> info@oracle69.com</p>
+      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
+      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
+      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
     </section>
   </main>
   <footer>
