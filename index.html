@@ -7,6 +7,12 @@
 <style>
   body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
   h1 { text-align: center; margin-bottom: 40px; }
+  <div style="text-align:center; margin-bottom: 20px;">
+  <input type="text" id="searchBox" placeholder="Search projects..." oninput="handleSearch()" style="padding: 8px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
+  <select id="topicFilter" onchange="handleSearch()" style="padding: 8px; margin-left: 10px; border-radius: 5px;">
+    <option value="">All Topics</option>
+  </select>
+</div>
   #repo-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 20px; }
   .repo { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
   .repo a { font-weight: bold; color: #0366d6; text-decoration: none; }
