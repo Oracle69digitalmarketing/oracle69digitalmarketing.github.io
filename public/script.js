@@ -1,48 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact - Oracle69 Digital Marketing</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>Contact Us</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <section>
-      <h2>Get in Touch</h2>
-      <form>
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message"></textarea><br>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-    <section style="margin-top: 40px;">
-      <h2>Contact Details</h2>
-      <p><strong>Phone:</strong> +2348039271978</p>
-      <p><strong>WhatsApp:</strong> +2348039271978</p>
-      <p><strong>Email:</strong> info@oracle69.com</p>
-      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
-      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
-      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
-    </section>
-  </main>
-  <footer>
-    <p>&copy; 2025 Oracle69 Digital Marketing</p>
-  </footer>
-</body>
-</html>
-  
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
+    };
+
+    if (!data.name || !data.email || !data.message) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      alert(result.message || "Message sent successfully");
+      if (response.ok) form.reset();
+    } catch (err) {
+      alert("Failed to send message. Try again later.");
+    }
+  });
+});
