@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#repo-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.repo {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.repo a {
+  font-weight: bold;
+  color: #0366d6;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.repo a:hover {
+  text-decoration: underline;
+}
+
+.desc {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  background: #0366d6;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 6px;
+  text-transform: capitalize;
+}
+
+.stats {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.stats span {
+  margin-right: 15px;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background: #eee;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+  background: #0366d6;
+  color: white;
+}
+
+.pagination button.active {
+  background: #0366d6;
+  color: white;
+  cursor: default;
+}
+
+/* Search and filter input styles */
+#searchBox {
+  padding: 8px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#topicFilter {
+  padding: 8px;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
