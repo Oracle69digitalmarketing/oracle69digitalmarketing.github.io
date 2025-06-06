@@ -1,11 +1,16 @@
 services:
   - type: web
-    name: oracle69-site
+    name: oracle69-contact-api
     env: node
-    buildCommand: npm install
-    startCommand: npm start
+    plan: free
+    branch: main
+    buildCommand: 'npm install'
+    startCommand: 'npm start'
     envVars:
-      - key: EMAIL_USER
-        sync: false
-      - key: EMAIL_PASS
-        sync: false
+      - key: CONTACT_EMAIL
+        fromDatabase: false
+      - key: CONTACT_PASSWORD
+        fromDatabase: false
+      - key: RECAPTCHA_SECRET
+        fromDatabase: false
+    staticPublishPath: public
