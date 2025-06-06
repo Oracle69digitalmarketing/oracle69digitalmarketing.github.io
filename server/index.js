@@ -1,28 +1,30 @@
-// index.js
-
 const express = require("express");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+const cors = require("cors");
 const axios = require("axios");
 const path = require("path");
-require("dotenv").config();
+
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Middleware
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "gmail", // or use 'smtp' with custom config
   auth: {
-    user: process.env.EMAIL_USERNAME, // Your Gmail address
-    pass: process.env.EMAIL_PASSWORD, // Your Gmail app password
+    user: process.env.CONTACT_EMAIL,
+    pass: process.env.CONTACT_PASSWORD, // app-specific password or real one
   },
 });
 
-// Contact form handler with reCAPTCHA verification
+// Contact API with reCAPTCHA v3 verification
 app.post("/api/contact", async (req, res) => {
   const { name, email, message, recaptcha } = req.body;
 
@@ -30,7 +32,6 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ message: "All fields are required." });
   }
 
-  // Verify reCAPTCHA
   try {
     const { data } = await axios.post("https://www.google.com/recaptcha/api/siteverify", null, {
       params: {
@@ -46,7 +47,6 @@ app.post("/api/contact", async (req, res) => {
     return res.status(500).json({ message: "reCAPTCHA verification error." });
   }
 
-  // Send email
   const mailOptions = {
     from: `"${name}" <${email}>`,
     to: process.env.CONTACT_EMAIL,
@@ -63,13 +63,12 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-// Fallback to serve frontend
+// Fallback to index.html for client-side routing (optional)
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
