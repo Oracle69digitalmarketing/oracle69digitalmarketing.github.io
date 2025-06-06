@@ -3,143 +3,43 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Oracle69 Portfolio</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    color: #234d20;
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  h1 {
-    color: #f2c94c;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  #repo-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 20px;
-  }
-  .repo {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-  }
-  .repo a {
-    font-weight: bold;
-    color: #234d20;
-    text-decoration: none;
-  }
-  .repo a:hover {
-    color: #d4b91f;
-    text-decoration: underline;
-  }
-  .pagination {
-    margin-top: 30px;
-    text-align: center;
-  }
-  .page-btn {
-    cursor: pointer;
-    background: #f2c94c;
-    border: none;
-    margin: 0 6px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: 700;
-    color: #234d20;
-    transition: background-color 0.3s ease;
-  }
-  .page-btn:hover {
-    background: #d4b91f;
-  }
-  .page-btn.active {
-    background: #234d20;
-    color: #f2c94c;
-  }
-</style>
+<title>Portfolio - Oracle69 Digital Marketing</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+  </nav>
 
-<nav>
-  <ul class="nav-menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="portfolio.html" aria-current="page">Portfolio</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
+  <header>
+    <h1>Our Projects Portfolio</h1>
+  </header>
 
-<h1>Oracle69 Projects Portfolio</h1>
-
-<div id="repo-list">Loading projects...</div>
-
-<div class="pagination" id="pagination"></div>
-
-<script>
-  const projects = [
-    {name: "oracle69digitalmarketing.github.io", url: "https://github.com/Oracle69digitalmarketing/oracle69digitalmarketing.github.io"},
-    {name: "Harmony Marketing Hub", url: "https://github.com/Oracle69digitalmarketing/Harmony_Marketing_Hub-"},
-    {name: "AI Website and Funnel Builder", url: "https://github.com/Oracle69digitalmarketing/AI_website_and_funnel_builder"},
-    {name: "AgroBrand Fusion AI", url: "https://github.com/Oracle69digitalmarketing/AgroBrand_Fusion_AI-"},
-    {name: "TessyFarm Smartloop", url: "https://github.com/Oracle69digitalmarketing/TessyFarm_smartloop"},
-    {name: "Responsive Landing Page", url: "https://github.com/Oracle69digitalmarketing/responsive-landing-page"},
-    {name: "Express.js API", url: "https://github.com/Oracle69digitalmarketing/Express.js-API"},
-    {name: "REST API with Express.js", url: "https://github.com/Oracle69digitalmarketing/REST-API-with-Express.js"},
-    {name: "Node.js Scalability Analysis", url: "https://github.com/Oracle69digitalmarketing/nodejs-scalability-analysis"},
-    {name: "Oracle69 HumanCore", url: "https://github.com/Oracle69digitalmarketing/Oracle69-HumanCore-"},
-    {name: "EduConnect", url: "https://github.com/Oracle69digitalmarketing/EduConnect"},
-    {name: "Calculator App (HTML/CSS/JS)", url: "https://github.com/Oracle69digitalmarketing/calculator-app-html-css-js-"},
-    {name: "My Personal Profile Page", url: "https://github.com/Oracle69digitalmarketing/My-personal-profile-page"},
-    {name: "Click Counter App", url: "https://github.com/Oracle69digitalmarketing/Click-Counter-App"},
-    {name: "Fetch and Display List from API", url: "https://github.com/Oracle69digitalmarketing/Fetch-and-Display-List-from-an-API"},
-    {name: "Hello World Vite", url: "https://github.com/Oracle69digitalmarketing/hello-world-vite"},
-    {name: "GitHub Slideshow", url: "https://github.com/Oracle69digitalmarketing/github-slideshow"}
-  ];
-
-  const perPage = 6;
-  let currentPage = 1;
-  const repoList = document.getElementById('repo-list');
-  const pagination = document.getElementById('pagination');
-
-  function renderProjects(page) {
-    repoList.innerHTML = '';
-    const start = (page - 1) * perPage;
-    const end = start + perPage;
-    const pagedProjects = projects.slice(start, end);
-
-    pagedProjects.forEach(proj => {
-      const div = document.createElement('div');
-      div.className = 'repo';
-      div.innerHTML = `<a href="${proj.url}" target="_blank" rel="noopener noreferrer">${proj.name}</a>`;
-      repoList.appendChild(div);
-    });
-  }
-
-  function renderPagination() {
-    pagination.innerHTML = '';
-    const pageCount = Math.ceil(projects.length / perPage);
-
-    for(let i = 1; i <= pageCount; i++) {
-      const btn = document.createElement('button');
-      btn.className = 'page-btn';
-      if(i === currentPage) btn.classList.add('active');
-      btn.textContent = i;
-      btn.addEventListener('click', () => {
-        currentPage = i;
-        renderProjects(currentPage);
-        renderPagination();
-        window.scrollTo({top:0, behavior:'smooth'});
-      });
-      pagination.appendChild(btn);
-    }
-  }
-
-  renderProjects(currentPage);
-  renderPagination();
-</script>
+  <section class="content">
+    <ul class="project-list">
+      <li><a href="https://github.com/Oracle69digitalmarketing/oracle69digitalmarketing.github.io" target="_blank">oracle69digitalmarketing.github.io</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/Harmony_Marketing_Hub-" target="_blank">Harmony Marketing Hub</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/AI_website_and_funnel_builder" target="_blank">AI Website and Funnel Builder</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/AgroBrand_Fusion_AI-" target="_blank">AgroBrand Fusion AI</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/TessyFarm_smartloop" target="_blank">TessyFarm Smartloop</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/responsive-landing-page" target="_blank">Responsive Landing Page</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/Express.js-API" target="_blank">Express.js API</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/REST-API-with-Express.js" target="_blank">REST API with Express.js</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/nodejs-scalability-analysis" target="_blank">Node.js Scalability Analysis</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/Oracle69-HumanCore-" target="_blank">Oracle69 HumanCore</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/EduConnect" target="_blank">EduConnect</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/calculator-app-html-css-js-" target="_blank">Calculator App (HTML/CSS/JS)</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/My-personal-profile-page" target="_blank">My Personal Profile Page</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/Click-Counter-App" target="_blank">Click Counter App</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/Fetch-and-Display-List-from-an-API" target="_blank">Fetch and Display List from API</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/hello-world-vite" target="_blank">Hello World Vite</a></li>
+      <li><a href="https://github.com/Oracle69digitalmarketing/github-slideshow" target="_blank">GitHub Slideshow</a></li>
+    </ul>
+  </section>
 </body>
 </html>
