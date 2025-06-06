@@ -1,31 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Oracle69 Projects Portfolio</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
-  h1 { text-align: center; margin-bottom: 40px; }
-  <div style="text-align:center; margin-bottom: 20px;">
-  <input type="text" id="searchBox" placeholder="Search projects..." oninput="handleSearch()" style="padding: 8px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
-  <select id="topicFilter" onchange="handleSearch()" style="padding: 8px; margin-left: 10px; border-radius: 5px;">
-    <option value="">All Topics</option>
-  </select>
-</div>
-  #repo-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 20px; }
-  .repo { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
-  .repo a { font-weight: bold; color: #0366d6; text-decoration: none; }
-  .repo a:hover { text-decoration: underline; }
-  .desc { margin-top: 8px; font-size: 0.9rem; color: #333; }
-  .stats { margin-top: 12px; font-size: 0.8rem; color: #666; }
-  .stats span { margin-right: 15px; }
-</style>
+  <meta charset="UTF-8">
+  <title>Contact - Oracle69 Digital Marketing</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Oracle69 Digital Marketing Projects</h1>
-  <div id="repo-list">Loading projects...</div>
-
-  <script src="main.js"></script>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <section style="margin-top: 40px;">
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong> +2348039271978</p>
+      <p><strong>WhatsApp:</strong> +2348039271978</p>
+      <p><strong>Email:</strong> info@oracle69.com</p>
+      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
+      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
+      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Oracle69 Digital Marketing</p>
+  </footer>
 </body>
 </html>
