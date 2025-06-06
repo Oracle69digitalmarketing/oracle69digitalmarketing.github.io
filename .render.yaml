@@ -1,4 +1,4 @@
-gservices:
+services:
   - type: web
     name: oracle69-contact-api
     env: node
