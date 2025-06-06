@@ -1,76 +1,47 @@
-const repoList = document.getElementById('repo-list');
-const pagination = document.getElementById('pagination');
-
-let projects = [];
-let currentPage = 1;
-const projectsPerPage = 6;
-
-async function fetchProjects() {
-  try {
-    // Replace this URL with your actual API or data source
-    const response = await fetch('https://api.example.com/projects'); 
-    projects = await response.json();
-
-    if (!Array.isArray(projects) || projects.length === 0) {
-      repoList.innerHTML = '<p>No projects found.</p>';
-      return;
-    }
-
-    renderPage(currentPage);
-    renderPagination();
-  } catch (error) {
-    repoList.innerHTML = `<p>Error loading projects.</p>`;
-  }
-}
-
-function renderPage(page) {
-  repoList.innerHTML = '';
-  const start = (page - 1) * projectsPerPage;
-  const end = start + projectsPerPage;
-  const pageProjects = projects.slice(start, end);
-
-  pageProjects.forEach(project => {
-    const card = document.createElement('div');
-    card.className = 'repo';
-
-    card.innerHTML = `
-      <a href="${project.url}" target="_blank" rel="noopener">${project.name}</a>
-      <p class="desc">${project.description || 'No description available.'}</p>
-      <div class="stats">
-        <span>⭐ ${project.stars ?? 0}</span>
-        <span>🍴 ${project.forks ?? 0}</span>
-      </div>
-    `;
-
-    repoList.appendChild(card);
-  });
-}
-
-function renderPagination() {
-  pagination.innerHTML = '';
-  const pageCount = Math.ceil(projects.length / projectsPerPage);
-
-  for (let i = 1; i <= pageCount; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'page-btn';
-    btn.textContent = i;
-    if (i === currentPage) btn.classList.add('active');
-
-    btn.addEventListener('click', () => {
-      currentPage = i;
-      renderPage(currentPage);
-      updatePagination();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    pagination.appendChild(btn);
-  }
-}
-
-function updatePagination() {
-  Array.from(pagination.children).forEach((btn, idx) => {
-    btn.classList.toggle('active', idx + 1 === currentPage);
-  });
-}
-
-fetchProjects();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Oracle69 Digital Marketing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <section style="margin-top: 40px;">
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong> +2348039271978</p>
+      <p><strong>WhatsApp:</strong> +2348039271978</p>
+      <p><strong>Email:</strong> info@oracle69.com</p>
+      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
+      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
+      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Oracle69 Digital Marketing</p>
+  </footer>
+</body>
+</html>
