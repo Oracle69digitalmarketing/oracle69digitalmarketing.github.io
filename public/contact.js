@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     responseEl.textContent = "Sending...";
 
     const name = form.name.value.trim();
