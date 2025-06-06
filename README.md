@@ -1,36 +1,47 @@
-# Oracle69 Projects Portfolio
-
-This is a dynamic portfolio page showcasing Oracle69 Digital Marketing's GitHub projects.
-
-## Features
-
-- Fetches public repositories from GitHub automatically.
-- Auto-tags repos based on keywords in names and descriptions.
-- Category filter dropdown for easy browsing.
-- Search filter to find projects by name.
-- Pagination for smooth navigation.
-- Displays repo stars, forks, and last update date.
-- Clean, responsive UI.
-
-## Setup
-
-1. Clone or download the project.
-2. Host the files on any static web server or open `index.html` in your browser.
-3. Make sure `main.js` and `style.css` are in the same directory as `index.html`.
-4. Modify `username` variable in `main.js` if needed.
-5. Open the page and explore the portfolio.
-
-## Files
-
-- `index.html`: Main page with search and filter inputs.
-- `main.js`: Fetches and renders repos, handles tagging, filtering, pagination.
-- `style.css`: Styles for a clean and responsive layout.
-
-## Notes
-
-- Uses GitHub public API; no authentication required but subject to rate limits.
-- Auto-tagging is based on simple keyword matching; adjust keywords in `main.js` as needed.
-
----
-
-Created for Oracle69 Digital Marketing by Adewumi Adewale.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Oracle69 Digital Marketing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+    <section style="margin-top: 40px;">
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong> +2348039271978</p>
+      <p><strong>WhatsApp:</strong> +2348039271978</p>
+      <p><strong>Email:</strong> info@oracle69.com</p>
+      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
+      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
+      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Oracle69 Digital Marketing</p>
+  </footer>
+</body>
+</html>
