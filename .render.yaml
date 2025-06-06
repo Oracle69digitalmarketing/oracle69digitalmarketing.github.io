@@ -3,14 +3,6 @@ services:
     name: oracle69-contact-api
     env: node
     plan: free
-    branch: main
-    buildCommand: 'npm install'
-    startCommand: 'npm start'
-    envVars:
-      - key: CONTACT_EMAIL
-        fromDatabase: false
-      - key: CONTACT_PASSWORD
-        fromDatabase: false
-      - key: RECAPTCHA_SECRET
-        fromDatabase: false
-    staticPublishPath: public
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
