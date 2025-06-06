@@ -1,44 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Contact Oracle69</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Contact - Oracle69 Digital Marketing</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.google.com/recaptcha/api.js?render=6LdFz7gUAAAAAPafjsOr4xhhWBiHATY3ayPhWnH9"></script>
 </head>
 <body>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <form id="contactForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <button type="submit">Send</button>
+        <p id="formResponse" style="margin-top: 10px;"></p>
+      </form>
+    </section>
+    <section style="margin-top: 40px;">
+      <h2>Contact Details</h2>
+      <p><strong>Phone:</strong> +2348039271978</p>
+      <p><strong>WhatsApp:</strong> +2348039271978</p>
+      <p><strong>Email:</strong> info@oracle69.com</p>
+      <p><strong>Alternate Email:</strong> tessyfarm@gmail.com</p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/oracle69digitalmarketing" target="_blank">Oracle69 LinkedIn</a></p>
+      <p><strong>Twitter:</strong> <a href="https://twitter.com/sophiemabel69" target="_blank">@sophiemabel69</a></p>
+      <p><strong>Location:</strong> Oracle69, Ijapo Estate, Akure, Ondo State, NG</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Oracle69 Digital Marketing</p>
+  </footer>
 
-<nav class="main-nav">
-  <ul>
-    <li><a href="index.html">Portfolio</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
-</nav>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contactForm");
+      const responseEl = document.getElementById("formResponse");
 
-<header>
-  <h1>Contact Oracle69 Digital Marketing</h1>
-</header>
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        responseEl.textContent = "Sending...";
 
-<main class="content-container">
-  <section>
-    <h2>Get in Touch</h2>
-    <p>We’d love to hear from you. Whether you have questions or want to explore collaboration, reach out:</p>
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
 
-    <form method="POST" action="/api/contact" id="contactForm" id="contact-form" action="mailto:contact@oracle69.com" method="post" enctype="text/plain">
-      <label for="name">Name</label><br />
-      <input type="text" id="name" name="name" required /><br /><br />
+        if (!name || !email || !message) {
+          responseEl.textContent = "Please fill all fields.";
+          return;
+        }
 
-      <label for="email">Email</label><br />
-      <input type="email" id="email" name="email" required /><br /><br />
+        grecaptcha.ready(() => {
+          grecaptcha.execute("6LdFz7gUAAAAAPafjsOr4xhhWBiHATY3ayPhWnH9", { action: "submit" }).then(async (token) => {
+            try {
+              const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message, recaptcha: token }),
+              });
 
-      <label for="message">Message</label><br />
-      <textarea id="message" name="message" rows="5" required></textarea><br /><br />
+              const data = await res.json();
+              responseEl.textContent = data.message;
 
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-</main>
-<script src="script.js"></script>
+              if (res.ok) form.reset();
+            } catch (err) {
+              responseEl.textContent = "Error sending message.";
+            }
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
