@@ -1,106 +1,103 @@
-const repoList = document.getElementById('repo-list');
+const username = "Oracle69digitalmarketing";
+const reposPerPage = 6;
+let currentPage = 1;
+let allRepos = [];
+let filteredRepos = [];
 
-const allowedRepos = new Set([
-  "oracle69digitalmarketing.github.io",
-  "Harmony_Marketing_Hub-",
-  "AI_website_and_funnel_builder",
-  "AgroBrand_Fusion_AI-",
-  "TessyFarm_smartloop",
-  "responsive-landing-page",
-  "Express.js-API",
-  "REST-API-with-Express.js",
-  "nodejs-scalability-analysis",
-  "Oracle69-HumanCore-",
-  "EduConnect",
-  "calculator-app-html-css-js-",
-  "My-personal-profile-page",
-  "Click-Counter-App",
-  "Fetch-and-Display-List-from-an-API",
-  "hello-world-vite",
-  "github-slideshow"
-]);
-
-let reposData = [];
-
-const container = document.createElement('div');
-const searchInput = document.createElement('input');
-const sortSelect = document.createElement('select');
-
-function createUI() {
-  searchInput.type = 'search';
-  searchInput.placeholder = 'Search projects...';
-  searchInput.style.marginBottom = '15px';
-  searchInput.style.padding = '8px';
-  searchInput.style.width = '100%';
-
-  sortSelect.innerHTML = `
-    <option value="name">Sort by Name (A-Z)</option>
-    <option value="stars">Sort by Stars (desc)</option>
-    <option value="forks">Sort by Forks (desc)</option>
-  `;
-  sortSelect.style.marginBottom = '20px';
-  sortSelect.style.padding = '8px';
-  sortSelect.style.width = '100%';
-
-  repoList.innerHTML = '';
-  repoList.appendChild(searchInput);
-  repoList.appendChild(sortSelect);
-  repoList.appendChild(container);
-
-  searchInput.addEventListener('input', () => renderRepos());
-  sortSelect.addEventListener('change', () => renderRepos());
+async function fetchRepos() {
+  const res = await fetch(`https://api.github.com/users/${username}/repos`);
+  const data = await res.json();
+  allRepos = data.filter(repo => !repo.fork);
+  extractTopics(allRepos);
+  handleSearch(); // also initializes filteredRepos
 }
 
-function renderRepos() {
-  const query = searchInput.value.toLowerCase();
-  let filtered = reposData.filter(r => r.name.toLowerCase().includes(query));
-
-  switch (sortSelect.value) {
-    case 'stars':
-      filtered.sort((a,b) => b.stargazers_count - a.stargazers_count);
-      break;
-    case 'forks':
-      filtered.sort((a,b) => b.forks_count - a.forks_count);
-      break;
-    default:
-      filtered.sort((a,b) => a.name.localeCompare(b.name));
-  }
-
-  container.innerHTML = '';
-
-  if (filtered.length === 0) {
-    container.innerHTML = '<p>No projects match your search.</p>';
-    return;
-  }
-
-  filtered.forEach(repo => {
-    const repoEl = document.createElement('div');
-    repoEl.className = 'repo';
-    repoEl.innerHTML = `
-      <a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a>
-      <div class="desc">${repo.description || 'No description provided.'}</div>
-      <div class="stats">
-        <span>⭐ ${repo.stargazers_count}</span>
-        <span>🍴 ${repo.forks_count}</span>
-      </div>
-    `;
-    container.appendChild(repoEl);
+function extractTopics(repos) {
+  const topicSet = new Set();
+  repos.forEach(repo => {
+    if (repo.topics) {
+      repo.topics.forEach(t => topicSet.add(t));
+    }
+  });
+  const topicFilter = document.getElementById("topicFilter");
+  topicSet.forEach(topic => {
+    const opt = document.createElement("option");
+    opt.value = topic;
+    opt.textContent = topic;
+    topicFilter.appendChild(opt);
   });
 }
 
-async function fetchRepos() {
-  try {
-    const res = await fetch('https://api.github.com/users/Oracle69digitalmarketing/repos?per_page=100');
-    if (!res.ok) throw new Error('Failed to fetch repos');
-    const repos = await res.json();
+function handleSearch() {
+  const query = document.getElementById("searchBox").value.toLowerCase();
+  const topic = document.getElementById("topicFilter").value;
 
-    reposData = repos.filter(r => allowedRepos.has(r.name));
+  filteredRepos = allRepos.filter(repo => {
+    const matchesName = repo.name.toLowerCase().includes(query);
+    const matchesTopic = topic ? (repo.topics && repo.topics.includes(topic)) : true;
+    return matchesName && matchesTopic;
+  });
 
-    createUI();
-    renderRepos();
-  } catch (error) {
-    repoList.innerHTML = `<p>Error loading repos: ${error.message}</p>`;
+  currentPage = 1;
+  renderRepos();
+  renderPagination();
+}
+
+function renderRepos() {
+  const repoList = document.getElementById("repo-list");
+  repoList.innerHTML = "";
+
+  const start = (currentPage - 1) * reposPerPage;
+  const end = start + reposPerPage;
+  const paginated = filteredRepos.slice(start, end);
+
+  paginated.forEach(repo => {
+    const div = document.createElement("div");
+    div.className = "repo";
+    div.innerHTML = `
+      <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+      <div class="desc">${repo.description || "No description"}</div>
+      <div class="stats">
+        <span>⭐ ${repo.stargazers_count}</span>
+        <span>🍴 ${repo.forks_count}</span>
+        <span>📅 ${new Date(repo.updated_at).toLocaleDateString()}</span>
+      </div>
+    `;
+    repoList.appendChild(div);
+  });
+
+  if (paginated.length === 0) {
+    repoList.innerHTML = "<p style='text-align:center;'>No projects found.</p>";
   }
+}
+
+function renderPagination() {
+  const totalPages = Math.ceil(filteredRepos.length / reposPerPage);
+  let html = `<div style="text-align:center;margin-top:30px;">`;
+
+  if (currentPage > 1) html += `<button onclick="changePage(${currentPage - 1})">◀ Prev</button>`;
+
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button onclick="changePage(${i})" style="margin:0 5px;${i === currentPage ? 'font-weight:bold;background:#0366d6;color:white;' : ''}">${i}</button>`;
+  }
+
+  if (currentPage < totalPages) html += `<button onclick="changePage(${currentPage + 1})">Next ▶</button>`;
+  html += `</div>`;
+
+  const pagination = document.getElementById("pagination");
+  if (pagination) pagination.innerHTML = html;
+  else {
+    const div = document.createElement("div");
+    div.id = "pagination";
+    div.innerHTML = html;
+    document.body.appendChild(div);
+  }
+}
+
+function changePage(page) {
+  currentPage = page;
+  renderRepos();
+  renderPagination();
 }
 
 fetchRepos();
